@@ -4,6 +4,6 @@
 
 ## Status
 
-TODO: search page is pending.
-TODO: fix the auth0 bug that redirects wrongly to index site after refreshing the page.
+TODO: search page is pending.\
+TODO: fix the auth0 bug that redirects wrongly to index site after refreshing the page.\
 
