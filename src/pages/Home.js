@@ -37,6 +37,7 @@ export const Home = () => {
             showStatus={false}
             stopOnHover={false}
             autoPlay={true}
+            infiniteLoop={true}
             interval={5000}
             className="px-0"
           >
