@@ -3,6 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import { useForm } from "../hooks/useForm";
 import { useFetch } from "../hooks/useFetch";
+import { useDispatch, useSelector } from "react-redux";
+import { bookSearch } from "../utils/bookSearch";
+import { openModal } from "../redux/modalSlice";
+import { DetailsModal } from "../components/DetailsModal";
 
 export const Search = () => {
   const navigate = useNavigate();
@@ -22,7 +26,7 @@ export const Search = () => {
           value: q,
         },
       });
-      console.log(q)
+      console.log(q);
       return () => {
         console.log("cleanup");
       };
@@ -37,6 +41,16 @@ export const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate(`?q=${searchText}`);
+  };
+
+  const modal = useSelector((state) => state.modal.show || false);
+  const dispatch = useDispatch();
+  useEffect(() => {}, [modal]); // quería controlar el modal, pero no pude
+  let bookFetch = {};
+
+  const handleDetails = async (isbn13) => {
+    bookFetch = await bookSearch(isbn13);
+    dispatch(openModal(bookFetch));
   };
 
   return (
@@ -78,9 +92,15 @@ export const Search = () => {
                   <h5 className="card-title">{book.subtitle}</h5>
                   <p className="card-text">ISBN: {book.isbn13}</p>
                   <p className="card-text">Price: {book.price}</p>
+                  <button
+                    className="btn btn-dark"
+                    onClick={() => handleDetails(book.isbn13)}
+                  >
+                    See more details
+                  </button>
                   <a
                     href={book.url}
-                    className="btn btn-dark"
+                    className="btn btn-dark ms-2"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -91,6 +111,7 @@ export const Search = () => {
             </div>
           ))}
       </div>
+      {modal && <DetailsModal />}
     </div>
   );
 };
