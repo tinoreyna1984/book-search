@@ -32,7 +32,7 @@ export const DetailsModal = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">{book.title}</h4>
+              <h4 className="modal-title">{book.title}</h4><br/>
               <h5 className="modal-title">{book.subtitle}</h5>
               <button
                 type="button"
