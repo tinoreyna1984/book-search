@@ -28,7 +28,7 @@ export const DetailsModal = () => {
 
   return (
     <div className="py-2">
-      <div className="modal" tabIndex="-1" ref={parseExceptionModal}>
+      <div className="modal fade" tabIndex="-1" ref={parseExceptionModal}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header flex-column">
